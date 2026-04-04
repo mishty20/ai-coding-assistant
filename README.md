@@ -1,16 +1,47 @@
-# React + Vite
+# 🚀 AI Coding Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered coding assistant built using **React, Node.js, and Groq API** that helps users with programming questions, code generation, and explanations in a ChatGPT-like interface.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- 💬 ChatGPT-like UI with modern design
+- ⚡ Real-time AI responses (Groq API)
+- ⌨️ Typing animation for AI replies
+- 📋 Copy button for code blocks
+- 🎤 Voice input (Speech Recognition)
+- 🔐 Login & Signup system
+- 👤 User avatar with initials
+- 🧹 Clear chat functionality
+- 🎨 Clean responsive UI with Tailwind CSS
+---
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend:
+- React (Vite)
+- Tailwind CSS
 
-## Expanding the ESLint configuration
+### Backend:
+- Node.js
+- Express.js
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### API:
+- Groq API
+---
+
+## ⚙️ Installation & Setup
+
+### 1️ Clone the repository
+### 2 Add .env in backend:
+GROQ_API_KEY = your_api_key
+```bash
+node backend/server.js
+npm run dev
+
+```bash
+git clone https://github.com/mishty20/ai-coding-assistant.git
+cd ai-coding-assistant
+
+⭐ If you like this project
+Give it a ⭐ on GitHub!
