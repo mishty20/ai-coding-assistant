@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Chat() {
   const [messages, setMessages] = useState([]);
@@ -23,13 +23,13 @@ function Chat() {
     chatRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  useEffect(() =>{
+  useEffect(() => {
     setMessages([
       {
         text: "Hi 👋 I'm your AI Coding Assistant.\nAsk me anything about programming, projects, or concepts!",
         sender: "bot",
       },
-  ]);
+    ]);
   }, []);
 
   // 🎤 Speech Recognition
@@ -144,9 +144,9 @@ function Chat() {
         {/* User Icon */}
         <div className="relative flex items-center gap-3">
 
-          <button 
+          <button
             onClick={() => setMessages([])}
-            className= "text-xs text-gray-400 hover:text-red-400"
+            className="text-xs text-gray-400 hover:text-red-400"
           >
             <span className="text-sm text-gray-300">Clear</span>
           </button>
@@ -179,79 +179,79 @@ function Chat() {
       </div>
 
       {/* Chat Area */}
-      <div className="flex-1 overflow-auto px-4 py-6 flex flex-col items-center">
+      <div className="flex-1 overflow-auto px-4 py-6">
+        <div className="w-full flex flex-col">
 
-        <div className="max-w-4xl w-full">
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`w-full flex ${msg.sender === "user" ? "justify-end" : "justify-start"
-                }`}
+              className={`px-4 py-3 my-2 rounded-2xl max-w-[70%] break-words ${msg.sender === "user"
+                  ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white ml-auto"
+                  : "bg-[#2a1f4a] text-gray-200 mr-auto"
+                } shadow-md`}
             >
-              <div
-                className={`px-4 py-3 my-2 rounded-2xl max-w-[700px] break-words ${msg.sender === "user"
-                  ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white"
-                  : "bg-[#2a1f4a] text-gray-200"
-                  } shadow-md`}
-              >
-                {msg.text.includes("```") ? (
-                  <div className="relative">
-                    <button onClick={() =>
+
+              {msg.text.includes("```") ? (
+                <div className="relative">
+                  <button
+                    onClick={() =>
                       navigator.clipboard.writeText(msg.text.replace(/```/g, ""))
                     }
-                      className="absolute top-2 right-2 text-xs bg-purple-600 px-2 py-1 rounded hover:bg-purple-700"
-                    >
-                      Copy
-                    </button>
-                    <pre className="bg-black/60 p-4 rounded-xl overflow-x-auto text-sm font-mono leading-relaxed border border-purple-500/20">
-                      <code>{msg.text.replace(/```/g, "")}</code>
-                    </pre>
-                  </div>
-                ) : (
-                  msg.text.split("\n").map((line, i) => (
-                    <p key={i} className="leading-relaxed mb-1">
-                      {line}
-                    </p>
-                  ))
-                )}
-              </div>
+                    className="absolute top-2 right-2 text-xs bg-purple-600 px-2 py-1 rounded hover:bg-purple-700"
+                  >
+                    Copy
+                  </button>
+
+                  <pre className="bg-black/60 p-4 rounded-xl overflow-x-auto text-sm font-mono leading-relaxed border border-purple-500/20">
+                    <code>{msg.text.replace(/```/g, "")}</code>
+                  </pre>
+                </div>
+              ) : (
+                msg.text.split("\n").map((line, i) => (
+                  <p key={i} className="leading-relaxed mb-1">
+                    {line}
+                  </p>
+                ))
+              )}
+
             </div>
           ))}
-        </div>
 
-        <div ref={chatRef}></div>
+          <div ref={chatRef}></div>
+        </div>
       </div>
 
       {/* Input Area */}
-      <div className="p-4 flex gap-3 border-t border-purple-700">
+      <div className="p-4 flex gap-3 border-t border-purple-700 sticky bottom-0 bg-[#140d2b]">
+        <div className="max-w-[900px] mx-auto w-full flex gap-3">
+          <input
+            type="text"
+            placeholder={isListening ? "Listening..." : "Ask me anything about coding, DSA, or concepts..."}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            className="flex-1 p-3 rounded-full bg-white/10 text-white outline-none placeholder-gray-300 focus:ring-2 focus:ring-purple-500"
+          />
 
-        <input
-          type="text"
-          placeholder={isListening ? "Listening..." : "Ask me anything about coding, DSA, or concepts..."}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-          className="flex-1 p-3 rounded-full bg-white/10 text-white outline-none placeholder-gray-300 focus:ring-2 focus:ring-purple-500"
-        />
+          {/* 🎤 Mic Button */}
+          <button
+            onClick={handleMic}
+            className={`px-4 rounded-full ${isListening
+              ? "bg-red-500"
+              : "bg-gradient-to-r from-purple-600 to-indigo-600"
+              }`}
+          >
+            🎤
+          </button>
 
-        {/* 🎤 Mic Button */}
-        <button
-          onClick={handleMic}
-          className={`px-4 rounded-full ${isListening
-            ? "bg-red-500"
-            : "bg-gradient-to-r from-purple-600 to-indigo-600"
-            }`}
-        >
-          🎤
-        </button>
-
-        {/* Send Button */}
-        <button
-          onClick={sendMessage}
-          className="bg-gradient-to-r from-purple-600 to-indigo-600 px-5 rounded-full hover:scale-105 transition duration-200"
-        >
-          Send
-        </button>
+          {/* Send Button */}
+          <button
+            onClick={sendMessage}
+            className="bg-gradient-to-r from-purple-600 to-indigo-600 px-5 rounded-full hover:scale-105 transition duration-200"
+          >
+            Send
+          </button>
+        </div>
       </div>
     </div>
   );
